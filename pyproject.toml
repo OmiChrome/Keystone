@@ -1,0 +1,30 @@
+[project]
+name = "keystone"
+version = "0.1.0"
+description = "Keystone: a suite of procurement specialist agents (MCP) for construction & data-center projects"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "httpx>=0.28.1",
+    "mcp>=2.3",
+    "numpy>=2.5.4",
+    "pdfplumber>=0.11.10",
+    "pydantic>=2.14.3",
+    "python-multipart>=0.0.33",
+    "rapidfuzz>=3.14.6",
+    "reportlab>=5.1.0",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+keystone = "keystone.cli:main"
+keystone-mcp = "keystone.mcp_server:main"
+
+[build-system]
+requires = ["uv_build>=0.11.32,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]

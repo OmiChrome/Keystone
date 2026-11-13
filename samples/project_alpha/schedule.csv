@@ -1,0 +1,14 @@
+activity_id,name,duration_days,predecessors,requires_po
+A100,Notice to proceed,0,,
+A110,Electrical room ER-1 and roof structure ready,210,A100,
+A120,Set LV switchgear SWG-1,10,A110,PO-1001
+A130,Pull and terminate feeders,25,A120,
+A140,Set pad-mounted transformers,7,A110,PO-1002
+A150,Set standby generators,14,A110,PO-1003
+A160,Utility energization,10,A130;A140,
+A170,Set UPS modules,10,A110,PO-1004
+A180,Set chillers on roof,12,A110,PO-1005
+A190,Mechanical piping tie-in,30,A180,
+A200,Level 3 commissioning,25,A160;A150;A170;A190,
+A210,Integrated systems test (Level 5),15,A200,
+A220,Substantial completion,0,A210,

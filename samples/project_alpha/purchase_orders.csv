@@ -1,0 +1,6 @@
+po_number,item,vendor,order_date,quoted_lead_weeks,promised_date,shipment_mode,status
+PO-1001,"480V switchgear lineup SWG-1, 4000 A",Voltara Power Systems (fictional),2026-12-15,34,2027-08-10,Ocean,Submittal under review
+PO-1002,2500 kVA pad-mounted transformers (2),Indus Transformers (fictional),2026-11-20,50,2027-11-05,Truck,In fabrication
+PO-1003,3000 kW diesel standby generator sets (2),Konark Power Gen (fictional),2026-10-05,56,2027-11-01,Ocean,In fabrication
+PO-1004,1.2 MW modular UPS systems (4),Arcline Critical Power (fictional),2027-01-05,26,2027-07-06,Air,Shop drawings approved
+PO-1005,500-ton air-cooled chillers (2),Frostline Thermal Systems (fictional),2027-01-10,28,2027-07-25,Ocean,Submittal returned - revise and resubmit

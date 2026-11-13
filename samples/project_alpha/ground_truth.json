@@ -1,0 +1,68 @@
+{
+ "compliance": {
+  "spec": "spec_26_23_00_lv_switchgear.pdf",
+  "submittal": "submittal_voltara_swg1.pdf",
+  "labels": {
+   "1.5.A warranty 24 months": "deviate",
+   "1.6.A delivery 30 weeks": "deviate",
+   "2.2.A 480Y/277V 3ph 4w 60Hz": "comply",
+   "2.2.B main bus >= 4000 A": "comply",
+   "2.2.C SCCR >= 65 kA": "deviate",
+   "2.3.A silver-plated copper bus": "deviate",
+   "2.3.B neutral 100% rated": "comply",
+   "2.3.C copper ground bus full length": "comply",
+   "2.3.D NEMA 1, UL 1558": "comply",
+   "2.3.E lineup length <= 240 in": "deviate",
+   "2.3.F ANSI 61 finish": "comply",
+   "2.4.A drawout electrically operated UL 1066": "comply",
+   "2.4.B LSIG trip units": "comply",
+   "2.4.C ERMS per NEC 240.87": "comply",
+   "2.5.A meter accuracy class 0.2": "deviate",
+   "2.5.B Modbus TCP and BACnet/IP": "deviate",
+   "2.6.A SPD >= 200 kA per phase": "deviate",
+   "2.7.A seismic qualification": "missing",
+   "3.2.A factory witness testing": "comply",
+   "3.3.A manufacturer startup": "missing"
+  }
+ },
+ "bids": {
+  "scope": [
+   "Switchgear lineup per Section 26 23 00",
+   "Integral surge protective device (SPD)",
+   "Revenue-grade power metering",
+   "Freight to site (DDP)",
+   "Offloading and rigging at site",
+   "Startup and commissioning",
+   "Factory witness testing",
+   "Arc flash and coordination study",
+   "Owner training",
+   "Spare parts",
+   "Seismic certification",
+   "24-month warranty"
+  ],
+  "status": {
+   "Voltara": {
+    "Freight to site (DDP)": "excluded",
+    "Offloading and rigging at site": "excluded",
+    "Startup and commissioning": "excluded",
+    "Seismic certification": "not_mentioned",
+    "24-month warranty": "qualified"
+   },
+   "Northgate": {},
+   "Helix": {
+    "Integral surge protective device (SPD)": "excluded",
+    "Arc flash and coordination study": "excluded",
+    "Spare parts": "excluded",
+    "Seismic certification": "excluded",
+    "Owner training": "included",
+    "24-month warranty": "qualified"
+   }
+  },
+  "arithmetic_errors": {
+   "Helix": {
+    "stated": 991500,
+    "computed": 1004500
+   }
+  }
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "compliance": {
+  "spec": "spec_23_64_26_chillers.pdf",
+  "submittal": "submittal_frostline_chillers.pdf",
+  "labels": {
+   "1.4.A compressor warranty 5y parts+labor": "deviate",
+   "2.2.A capacity >= 500 tons": "deviate",
+   "2.2.B full-load <= 1.20 kW/ton": "comply",
+   "2.2.C IPLV <= 0.80": "comply",
+   "2.2.D GWP <= 700": "comply",
+   "2.2.E sound <= 78 dBA @30ft": "deviate",
+   "2.2.F ambient >= 125F": "comply",
+   "2.3.A 460/3/60 single point": "comply",
+   "2.3.B SCCR >= 65 kA": "deviate",
+   "2.4.A mag-bearing or VS screw": "comply",
+   "2.4.B EC fans": "comply",
+   "2.4.C e-coat coils": "deviate",
+   "2.4.D free cooling": "comply",
+   "2.4.E BACnet/IP native": "deviate",
+   "2.5.A weight <= 30000 lb": "comply",
+   "3.1.A witnessed factory performance test": "missing"
+  }
+ },
+ "bids": {
+  "scope": [
+   "Two air-cooled chillers per Section 23 64 26",
+   "Freight to site",
+   "Crane and rigging to roof",
+   "Factory startup",
+   "Factory performance test",
+   "BMS integration",
+   "Vibration isolation",
+   "5-year compressor warranty",
+   "Owner training"
+  ],
+  "status": {
+   "Frostline": {
+    "Crane and rigging to roof": "excluded",
+    "BMS integration": "excluded",
+    "5-year compressor warranty": "qualified"
+   },
+   "CoolStream": {
+    "Factory performance test": "excluded",
+    "Vibration isolation": "excluded"
+   }
+  },
+  "arithmetic_errors": {}
+ }
+}

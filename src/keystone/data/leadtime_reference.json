@@ -1,0 +1,82 @@
+{
+  "_about": "Reference-class lead times (weeks, purchase order to delivery) for long-lead construction / data-center equipment. p10/p50/p90 are Keystone's reading of the published ranges below: where a source gives a range we treat its low/high as roughly P10/P90; where it gives a survey average we treat it as the median. Every figure links to the source it came from. Last reviewed 2026-11-13. Replace or extend with your own project history (see README).",
+  "categories": {
+    "lv_switchgear": {
+      "label": "Low-voltage switchgear / power-circuit-breaker switchboards (<=600 V)",
+      "keywords": ["switchgear", "480v", "480 v", "low voltage", "switchboard", "ul 1558", "power circuit breaker"],
+      "p10": 40, "p50": 52, "p90": 84,
+      "sources": [
+        {"claim": "Switchgear survey average ~44 weeks (Wood Mackenzie Q2 2025, as reported)", "url": "https://eepower.com/market-insights/transformer-supply-chain-woes-persist-as-energy-demand-grows/"},
+        {"claim": "Data-center-class switchgear 52 to 84+ weeks per contractor quotes", "url": "https://www.industrialsage.com/switchgear-lead-times-2026/"},
+        {"claim": "Standard switchboards near 52 weeks; power-circuit-breaker switchboards past 84 weeks (JLL 2026, as reported)", "url": "https://www.bisnow.com/news/national/data-center-development/ai-boom-keeps-data-center-supply-chains-stretched-to-the-breaking-point"}
+      ]
+    },
+    "mv_switchgear_15kv": {
+      "label": "Medium-voltage switchgear, 15 kV class",
+      "keywords": ["15kv", "15 kv", "medium voltage switchgear", "mv switchgear", "metal-clad"],
+      "p10": 52, "p50": 64, "p90": 80,
+      "sources": [{"claim": "15 kV class MV switchgear 52 to 80 weeks (2026 procurement dataset, as reported)", "url": "https://www.industrialsage.com/switchgear-lead-times-2026/"}]
+    },
+    "mv_switchgear_38kv": {
+      "label": "Medium-voltage switchgear, 38 kV class",
+      "keywords": ["38kv", "38 kv", "35kv", "35 kv"],
+      "p10": 78, "p50": 90, "p90": 104,
+      "sources": [{"claim": "38 kV class 78 to 104 weeks", "url": "https://www.industrialsage.com/switchgear-lead-times-2026/"}]
+    },
+    "padmount_transformer": {
+      "label": "Pad-mounted / unit-substation transformer, 0-5 MVA",
+      "keywords": ["pad mount", "padmount", "pad-mounted", "unit substation", "kva transformer", "dry-type", "2500 kva", "mva transformer"],
+      "p10": 40, "p50": 52, "p90": 65,
+      "sources": [
+        {"claim": "Pad-mount transformers 0-5 MVA 40 to 65 weeks (2026 procurement dataset, as reported)", "url": "https://www.industrialsage.com/switchgear-lead-times-2026/"},
+        {"claim": "Data-center padmount units 40+ weeks", "url": "https://www.gigaenergy.com/blog/lead-time-delays-for-data-centers"}
+      ]
+    },
+    "power_transformer": {
+      "label": "Large power transformer (substation class)",
+      "keywords": ["power transformer", "substation transformer", "gsu", "step-up", "138kv", "69kv"],
+      "p10": 100, "p50": 128, "p90": 165,
+      "sources": [
+        {"claim": "Power transformers averaged ~128 weeks, GSUs ~144 weeks (Wood Mackenzie Q2 2025, as reported)", "url": "https://powermag.com/transformers-in-2026-shortage-scramble-or-self-inflicted-crisis/"},
+        {"claim": "GSU lead times above 160 weeks by Q1 2026 (Reuters, as reported)", "url": "https://www.kitco.com/news/off-the-wire/2026-07-09/us-power-companies-scramble-secure-equipment-surging-data-center"}
+      ]
+    },
+    "diesel_generator": {
+      "label": "Diesel standby generator set, >2 MW",
+      "keywords": ["generator", "genset", "diesel", "standby power", "3000 kw", "3 mw", "2.5 mw"],
+      "p10": 60, "p50": 88, "p90": 110,
+      "sources": [
+        {"claim": "Diesel generators >3,000 kW 90 to 110 weeks (2026 procurement dataset, as reported)", "url": "https://www.industrialsage.com/switchgear-lead-times-2026/"},
+        {"claim": "Larger generator units 85-90 weeks through 2025 into 2026 (APAC/GCC)", "url": "https://insights.linesight.com/cmi-2026-june/industry-trends-and-supply-chain-dynamics-2026-apac-and-gcc/supply-chain"}
+      ]
+    },
+    "chiller": {
+      "label": "Chiller (air-cooled or water-cooled)",
+      "keywords": ["chiller", "air-cooled", "centrifugal", "magnetic bearing", "refrigeration ton", "tons"],
+      "p10": 20, "p50": 34, "p90": 52,
+      "sources": [
+        {"claim": "Air-cooled chillers 36 to 40 weeks in 2026 (Linesight, Europe)", "url": "https://insights.linesight.com/cmi-2026-june/industry-trends-and-supply-chain-dynamics-2026-europe/supply-chain"},
+        {"claim": "Chillers and cooling towers ~30-40 weeks", "url": "https://www.hourigan.group/resources/insights/supply-chain-strains-in-mission-critical-construction/"},
+        {"claim": "Centrifugal chillers 16-24 weeks (US PM guide)", "url": "https://www.irecruit.co/insights/how-data-center-construction-project-managers-manage-equipment-lead-times"}
+      ]
+    },
+    "ups": {
+      "label": "UPS system (data-center scale)",
+      "keywords": ["ups", "uninterruptible", "battery cabinet", "static switch"],
+      "p10": 20, "p50": 32, "p90": 52,
+      "sources": [
+        {"claim": "UPS systems 20-40 weeks", "url": "https://www.irecruit.co/insights/how-data-center-construction-project-managers-manage-equipment-lead-times"},
+        {"claim": "UPS grouped with switchgear at 12-18 months by some panelists (anecdotal upper tail)", "url": "https://www.bisnow.com/news/national/data-center-development/ai-boom-keeps-data-center-supply-chains-stretched-to-the-breaking-point"}
+      ]
+    },
+    "crah": {
+      "label": "CRAH / CRAC / fan-coil units",
+      "keywords": ["crah", "crac", "fan coil", "fcu", "computer room air", "ahu"],
+      "p10": 14, "p50": 24, "p90": 32,
+      "sources": [
+        {"claim": "CRAH and FCU systems 23 to 32 weeks (Linesight, Europe)", "url": "https://insights.linesight.com/cmi-2026-june/industry-trends-and-supply-chain-dynamics-2026-europe/supply-chain"},
+        {"claim": "AHUs/CRACs 12-18 weeks (US PM guide)", "url": "https://www.irecruit.co/insights/how-data-center-construction-project-managers-manage-equipment-lead-times"}
+      ]
+    }
+  }
+}
