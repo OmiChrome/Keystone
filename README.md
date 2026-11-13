@@ -40,6 +40,21 @@ uv run keystone eval                    # accuracy vs hand-labelled ground truth
 uv run pytest                           # offline tests (no API key needed)
 ```
 
+### Deploy (Vercel)
+
+The repo deploys to Vercel as-is: `app.py` is the FastAPI entrypoint, dependencies come from `pyproject.toml` + `uv.lock`,
+`scripts/build_web.py` builds the UI with Bun during the Vercel build, and `vercel.json` gives the function 300 s.
+
+1. vercel.com → **Add New… → Project** → import this GitHub repo (framework preset: FastAPI is auto-detected).
+2. **Settings → Environment Variables**: `KEYSTONE_LLM_API_KEY` (required for new documents; the bundled demo replays from `demo_cache/` without it).
+   Optional: `KEYSTONE_MODEL`, `KEYSTONE_VERIFIER_MODEL`, `KEYSTONE_FALLBACK_MODELS`, `KEYSTONE_LLM_BASE_URL`.
+3. Deploy. After that every push deploys automatically (pushes to `main` → production, other branches → preview URLs).
+
+On Vercel (`VERCEL` env set) Keystone runs in serverless mode: specialist jobs run inside the request (no background threads),
+the audit log lives in `/tmp` per instance, MCP over HTTP is stateless (`/mcp/`), and sample documents are re-ingested on cold starts.
+Uploaded PDFs may need re-uploading if a request lands on a fresh instance; for long uncached runs (> 300 s) or persistent
+uploads, run the same app on any container host with `./run.sh`.
+
 ### Connect Amber (MCP)
 
 ```jsonc
@@ -130,7 +145,7 @@ All served through AMD TokenLab (OpenAI-compatible). Typical uncached runs on th
 | schedule_risk (5 POs, 5,000 scenarios) | 1 (briefing) | < $0.001 | 1–10 s |
 | package_pipeline | ~13 | ≈ $0.01 | 2–5 min |
 
-Responses are cached on disk (`KEYSTONE_CACHE=1`) so demos replay instantly and identically; set `0` to force fresh calls.
+Responses are cached on disk in `demo_cache/` (`KEYSTONE_CACHE=1`) so demos replay instantly and identically; set `0` to force fresh calls.
 The client respects the provider's rate limit (`KEYSTONE_RPM`, default 18/min).
 
 ### Private / offline deployment

@@ -102,8 +102,11 @@ class DocStore:
     def add(self, doc: Document) -> Document:
         with self.lock:
             self.docs[doc.doc_id] = doc
-            self.root.mkdir(parents=True, exist_ok=True)
-            (self.root / f"{doc.doc_id}.json").write_text(json.dumps(doc.__dict__))
+            try:
+                self.root.mkdir(parents=True, exist_ok=True)
+                (self.root / f"{doc.doc_id}.json").write_text(json.dumps(doc.__dict__))
+            except OSError:
+                pass
         return doc
 
     def ingest_path(self, path: str | Path, kind: str = "document", name: str | None = None) -> Document:
@@ -118,8 +121,20 @@ class DocStore:
 
     def get(self, doc_id: str) -> Document:
         if doc_id not in self.docs:
+            self._ingest_samples()  # serverless cold start: sample doc ids are deterministic, rebuild them
+        if doc_id not in self.docs:
             raise KeyError(f"unknown doc_id {doc_id!r}; ingest it first")
         return self.docs[doc_id]
+
+    def _ingest_samples(self) -> None:
+        from .config import ROOT
+
+        for p in sorted((ROOT / "samples").glob("*/*.pdf")):
+            kind = p.name.split("_")[0] if p.name.split("_")[0] in ("spec", "submittal", "bid") else "document"
+            try:
+                self.ingest_path(p, kind)
+            except Exception:
+                continue
 
     def list(self) -> list[dict]:
         return [d.to_dict() for d in self.docs.values()]

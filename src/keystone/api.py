@@ -8,6 +8,7 @@ log of every model call the agent makes.
 
 from __future__ import annotations
 
+import contextlib
 import contextvars
 import json
 import threading
@@ -55,15 +56,24 @@ def submit(kind: str, fn: Callable[[], Any]) -> dict:
             job["status"] = "error"
         job["finished"] = time.time()
 
+    if settings.serverless:
+        # No background threads on serverless, and the next poll may hit another instance:
+        # run inline and hand back the finished job in the same response.
+        contextvars.copy_context().run(work)
+        return job_view(jid)
     _pool.submit(contextvars.copy_context().run, work)
     return {"job_id": jid, "status": "running"}
 
 
 @app.get("/api/jobs/{jid}")
 def job(jid: str, since: int = 0) -> dict:
-    j = _jobs.get(jid)
-    if not j:
+    if jid not in _jobs:
         raise HTTPException(404, "unknown job")
+    return job_view(jid, since)
+
+
+def job_view(jid: str, since: int = 0) -> dict:
+    j = _jobs[jid]
     return {
         "job_id": jid,
         "kind": j["kind"],
@@ -91,6 +101,7 @@ def health() -> dict:
         "rpm": settings.rpm,
         "cache": settings.cache,
         "api_key_configured": bool(settings.api_key),
+        "serverless": settings.serverless,
     }
 
 
@@ -233,35 +244,29 @@ def run(run_id: str) -> dict:
 try:
     from .mcp_server import mcp as _mcp
 
-    _mcp_app = _mcp.streamable_http_app(streamable_http_path="/", host="127.0.0.1")
+    # stateless + JSON responses on serverless: any instance can answer any MCP request
+    _mcp_app = _mcp.streamable_http_app(streamable_http_path="/", host="127.0.0.1", stateless_http=settings.serverless, json_response=settings.serverless)
     app.mount("/mcp", _mcp_app)
-
-    @app.on_event("startup")
-    async def _start_mcp():  # the MCP session manager needs its lifespan running
-        import contextlib
-
-        app.state._mcp_stack = contextlib.AsyncExitStack()
-        await app.state._mcp_stack.enter_async_context(_mcp_app.router.lifespan_context(_mcp_app))
-
-    @app.on_event("shutdown")
-    async def _stop_mcp():
-        await app.state._mcp_stack.aclose()
 except Exception as _e:  # pragma: no cover - MCP over HTTP is optional
+    _mcp_app = None
     print("MCP HTTP mount disabled:", _e)
 
 
+@contextlib.asynccontextmanager
+async def _lifespan(_app):
+    async with contextlib.AsyncExitStack() as stack:
+        if _mcp_app is not None:  # the MCP session manager needs its lifespan running
+            await stack.enter_async_context(_mcp_app.router.lifespan_context(_mcp_app))
+        yield
+
+
+app.router.lifespan_context = _lifespan
+
+# UI: mounted last so every /api and /mcp route wins; on Vercel this directory is promoted to the CDN.
 if WEB.exists():
-    app.mount("/assets", StaticFiles(directory=WEB / "assets"), name="assets") if (WEB / "assets").exists() else None
+    app.mount("/", StaticFiles(directory=WEB, html=True), name="ui")
+else:
 
     @app.get("/")
-    def index():
-        return FileResponse(WEB / "index.html")
-
-    @app.get("/{path:path}")
-    def spa(path: str):
-        f = WEB / path
-        if f.is_file():
-            return FileResponse(f)
-        if path.startswith("api/"):
-            return JSONResponse({"detail": "not found"}, 404)
-        return FileResponse(WEB / "index.html")
+    def no_ui() -> JSONResponse:
+        return JSONResponse({"detail": "UI not built - run `cd web && bun install && bun run build`", "api": "/api/health", "mcp": "/mcp/"})

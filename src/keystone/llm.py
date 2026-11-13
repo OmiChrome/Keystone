@@ -227,9 +227,12 @@ def chat(
             last_err = LLMError("empty completion")
             continue
         if settings.cache:
-            p = _cache_path(key)
-            p.parent.mkdir(parents=True, exist_ok=True)
-            p.write_text(json.dumps({"content": content, "model": model, "purpose": purpose}))
+            try:
+                p = _cache_path(key)
+                p.parent.mkdir(parents=True, exist_ok=True)
+                p.write_text(json.dumps({"content": content, "model": model, "purpose": purpose}))
+            except OSError:  # read-only filesystem (serverless) - caching is an optimisation only
+                pass
         return content
     if isinstance(last_err, (ModelUnavailable, httpx.HTTPError)) or last_err is None:
         raise ModelUnavailable(f"{model} unavailable after retries: {last_err}")

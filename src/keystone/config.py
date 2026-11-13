@@ -6,7 +6,21 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+def _root() -> Path:
+    """Project root (samples/, demo_cache/, web/dist). Works from a checkout or when installed as a package
+    (e.g. on Vercel, where the working directory is the project root)."""
+    if os.environ.get("KEYSTONE_ROOT"):
+        return Path(os.environ["KEYSTONE_ROOT"])
+    src_root = Path(__file__).resolve().parents[2]
+    if (src_root / "samples").exists():
+        return src_root
+    return Path.cwd()
+
+
+ROOT = _root()
+# Serverless (Vercel): read-only filesystem except /tmp, and no long-lived background threads.
+SERVERLESS = bool(os.environ.get("VERCEL") or os.environ.get("KEYSTONE_SERVERLESS"))
+_WRITABLE = Path("/tmp/keystone") if SERVERLESS else ROOT
 
 
 def _load_dotenv() -> None:
@@ -33,8 +47,9 @@ class Settings:
     fallback_models: tuple[str, ...] = tuple(m for m in os.environ.get("KEYSTONE_FALLBACK_MODELS", "Gemma-4-31B-IT,Qwen3.8-27B,DeepSeek-V4-Flash,MiniCPM-V-4.7-35B-A3B").split(",") if m)
     rpm: int = int(os.environ.get("KEYSTONE_RPM", "18"))
     cache: bool = os.environ.get("KEYSTONE_CACHE", "1") == "1"
-    cache_dir: Path = Path(os.environ.get("KEYSTONE_CACHE_DIR", str(ROOT / ".cache" / "llm")))
-    runs_dir: Path = Path(os.environ.get("KEYSTONE_RUNS_DIR", str(ROOT / "runs")))
+    cache_dir: Path = Path(os.environ.get("KEYSTONE_CACHE_DIR", str(ROOT / "demo_cache" / "llm")))
+    runs_dir: Path = Path(os.environ.get("KEYSTONE_RUNS_DIR", str(_WRITABLE / "runs")))
+    serverless: bool = SERVERLESS
     timeout_s: float = float(os.environ.get("KEYSTONE_TIMEOUT", "100"))
 
 

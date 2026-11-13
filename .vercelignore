@@ -1,0 +1,7 @@
+.venv
+.env
+.cache
+runs
+web/node_modules
+web/dist
+.pytest_cache

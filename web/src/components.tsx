@@ -178,7 +178,15 @@ export function useJob() {
     setEvents([]);
     setJob({ job_id: "", kind: path, status: "running", elapsed_s: 0, events: [], n_events: 0, result: null, error: null });
     try {
-      const { job_id } = await api.start(path, body);
+      const started: any = await api.start(path, body);
+      if (started.status !== "running") {
+        // serverless deployments run the job inside the request and return it finished
+        setEvents(started.events ?? []);
+        setJob(started);
+        if (started.status === "error") setError(started.error);
+        return;
+      }
+      const job_id: string = started.job_id;
       let seen = 0;
       const poll = async () => {
         try {

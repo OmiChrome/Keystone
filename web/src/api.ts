@@ -65,7 +65,7 @@ export const api = {
     return fetch("/api/documents", { method: "POST", body: fd }).then(j<any>);
   },
   start: (path: string, body: unknown) =>
-    fetch(`/api/${path}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }).then(j<{ job_id: string }>),
+    fetch(`/api/${path}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }).then(j<{ job_id: string; status: string } | Job>),
   job: (id: string, since: number) => fetch(`/api/jobs/${id}?since=${since}`).then(j<Job>),
   runs: () => fetch("/api/runs").then(j<any[]>),
   run: (id: string) => fetch(`/api/runs/${id}`).then(j<AgentResult>),

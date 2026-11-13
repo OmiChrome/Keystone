@@ -38,9 +38,12 @@ def run_agent(agent: str, inputs: dict[str, Any], fn: Callable[[], AgentResult])
 
 
 def persist(res: AgentResult) -> None:
-    d = settings.runs_dir / "results"
-    d.mkdir(parents=True, exist_ok=True)
-    (d / f"{res.run_id}.json").write_text(res.model_dump_json(indent=1))
+    try:
+        d = settings.runs_dir / "results"
+        d.mkdir(parents=True, exist_ok=True)
+        (d / f"{res.run_id}.json").write_text(res.model_dump_json(indent=1))
+    except OSError:  # audit log is best-effort on read-only filesystems
+        pass
 
 
 def load_run(run_id: str) -> dict:

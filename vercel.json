@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "python3 scripts/build_web.py",
+  "functions": {
+    "app.py": {
+      "maxDuration": 300,
+      "excludeFiles": "{tests/**,web/node_modules/**,web/src/**,eval/results_before_fix.json,docs/**,.venv/**}"
+    }
+  }
+}
