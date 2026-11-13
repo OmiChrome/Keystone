@@ -1,0 +1,703 @@
+{
+ "dev": {
+  "compliance": {
+   "project": "project_alpha",
+   "n_labels": 20,
+   "n_findings": 20,
+   "exact_accuracy": 1.0,
+   "issue_recall": 1.0,
+   "false_issue_rate": 0.0,
+   "escalation_rate": 0.0,
+   "auto_decided_accuracy": 1.0,
+   "auto_decided_n": 20,
+   "accuracy_by_confidence": {
+    "high": {
+     "n": 20,
+     "accuracy": 1.0
+    },
+    "medium": {
+     "n": 0,
+     "accuracy": null
+    },
+    "low": {
+     "n": 0,
+     "accuracy": null
+    }
+   },
+   "citation_verification_rate": 1.0,
+   "usage": {
+    "models": [
+     "DeepSeek-V4.1-Flash",
+     "Gemma-4-31B-IT"
+    ],
+    "llm_calls": 8,
+    "cached_calls": 8,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "cost_usd": 0.0,
+    "llm_latency_s": 0.0,
+    "wall_time_s": 0.01,
+    "trace": [
+     {
+      "purpose": "compliance:extract",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "compliance:review",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "compliance:review",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "compliance:review",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "compliance:review",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "compliance:verify",
+      "model": "Gemma-4-31B-IT",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "compliance:verify",
+      "model": "Gemma-4-31B-IT",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "compliance:verify",
+      "model": "Gemma-4-31B-IT",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     }
+    ]
+   },
+   "rows": [
+    {
+     "ref": "1.5.A",
+     "label": "1.5.A warranty 24 months",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "1.6.A",
+     "label": "1.6.A delivery 30 weeks",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "2.2.A",
+     "label": "2.2.A 480Y/277V 3ph 4w 60Hz",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "2.2.B",
+     "label": "2.2.B main bus >= 4000 A",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "2.2.C",
+     "label": "2.2.C SCCR >= 65 kA",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.998,
+     "needs_human": false
+    },
+    {
+     "ref": "2.3.A",
+     "label": "2.3.A silver-plated copper bus",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.996,
+     "needs_human": false
+    },
+    {
+     "ref": "2.3.B",
+     "label": "2.3.B neutral 100% rated",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "2.3.C",
+     "label": "2.3.C copper ground bus full length",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.993,
+     "needs_human": false
+    },
+    {
+     "ref": "2.3.D",
+     "label": "2.3.D NEMA 1, UL 1558",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.971,
+     "needs_human": false
+    },
+    {
+     "ref": "2.3.E",
+     "label": "2.3.E lineup length <= 240 in",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "2.3.F",
+     "label": "2.3.F ANSI 61 finish",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.984,
+     "needs_human": false
+    },
+    {
+     "ref": "2.4.A",
+     "label": "2.4.A drawout electrically operated UL 1066",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.996,
+     "needs_human": false
+    },
+    {
+     "ref": "2.4.B",
+     "label": "2.4.B LSIG trip units",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.993,
+     "needs_human": false
+    },
+    {
+     "ref": "2.4.C",
+     "label": "2.4.C ERMS per NEC 240.87",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.993,
+     "needs_human": false
+    },
+    {
+     "ref": "2.5.A",
+     "label": "2.5.A meter accuracy class 0.2",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "2.5.B",
+     "label": "2.5.B Modbus TCP and BACnet/IP",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.993,
+     "needs_human": false
+    },
+    {
+     "ref": "2.6.A",
+     "label": "2.6.A SPD >= 200 kA per phase",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "2.7.A",
+     "label": "2.7.A seismic qualification",
+     "expected": "missing",
+     "got": "missing",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.98,
+     "needs_human": false
+    },
+    {
+     "ref": "3.2.A",
+     "label": "3.2.A factory witness testing",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.987,
+     "needs_human": false
+    },
+    {
+     "ref": "3.3.A",
+     "label": "3.3.A manufacturer startup",
+     "expected": "missing",
+     "got": "missing",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.97,
+     "needs_human": false
+    }
+   ],
+   "run_id": "86c045b7e326"
+  },
+  "bids": {
+   "project": "project_alpha",
+   "scope_status_accuracy": 1.0,
+   "n_cells": 36,
+   "arithmetic_errors_expected": [
+    "Helix"
+   ],
+   "arithmetic_errors_found": [
+    "Helix"
+   ],
+   "arithmetic_detection_correct": true,
+   "recommendation": "Voltara Power Systems Pvt. Ltd.",
+   "citation_verification_rate": 0.988,
+   "mismatches": [],
+   "usage": {
+    "models": [
+     "DeepSeek-V4.1-Flash"
+    ],
+    "llm_calls": 4,
+    "cached_calls": 2,
+    "prompt_tokens": 1538,
+    "completion_tokens": 1363,
+    "cost_usd": 0.001053,
+    "llm_latency_s": 31.48,
+    "wall_time_s": 31.49,
+    "trace": [
+     {
+      "purpose": "bids:extract",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "bids:extract",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": true,
+      "latency_s": 0.0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+     },
+     {
+      "purpose": "bids:extract",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 22.24,
+      "completion_tokens": 1062,
+      "cost_usd": 0.000815
+     },
+     {
+      "purpose": "bids:memo",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 9.25,
+      "completion_tokens": 301,
+      "cost_usd": 0.000238
+     }
+    ]
+   },
+   "run_id": "e23a77b93170"
+  }
+ },
+ "heldout": {
+  "compliance": {
+   "project": "project_beta",
+   "n_labels": 16,
+   "n_findings": 16,
+   "exact_accuracy": 0.938,
+   "issue_recall": 0.857,
+   "false_issue_rate": 0.0,
+   "escalation_rate": 0.062,
+   "auto_decided_accuracy": 1.0,
+   "auto_decided_n": 15,
+   "accuracy_by_confidence": {
+    "high": {
+     "n": 15,
+     "accuracy": 1.0
+    },
+    "medium": {
+     "n": 0,
+     "accuracy": null
+    },
+    "low": {
+     "n": 1,
+     "accuracy": 0.0
+    }
+   },
+   "citation_verification_rate": 1.0,
+   "usage": {
+    "models": [
+     "DeepSeek-V4.1-Flash",
+     "Gemma-4-31B-IT"
+    ],
+    "llm_calls": 6,
+    "cached_calls": 0,
+    "prompt_tokens": 9655,
+    "completion_tokens": 6549,
+    "cost_usd": 0.004455,
+    "llm_latency_s": 236.13,
+    "wall_time_s": 120.66,
+    "trace": [
+     {
+      "purpose": "compliance:extract",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 40.65,
+      "completion_tokens": 1706,
+      "cost_usd": 0.001195
+     },
+     {
+      "purpose": "compliance:review",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 42.83,
+      "completion_tokens": 1104,
+      "cost_usd": 0.000871
+     },
+     {
+      "purpose": "compliance:review",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 52.29,
+      "completion_tokens": 1471,
+      "cost_usd": 0.001154
+     },
+     {
+      "purpose": "compliance:review",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 58.35,
+      "completion_tokens": 1392,
+      "cost_usd": 0.000988
+     },
+     {
+      "purpose": "compliance:verify",
+      "model": "Gemma-4-31B-IT",
+      "cached": false,
+      "latency_s": 20.35,
+      "completion_tokens": 429,
+      "cost_usd": 0.000121
+     },
+     {
+      "purpose": "compliance:verify",
+      "model": "Gemma-4-31B-IT",
+      "cached": false,
+      "latency_s": 21.65,
+      "completion_tokens": 447,
+      "cost_usd": 0.000127
+     }
+    ]
+   },
+   "rows": [
+    {
+     "ref": "1.4.A",
+     "label": "1.4.A compressor warranty 5y parts+labor",
+     "expected": "deviate",
+     "got": "comply",
+     "correct": false,
+     "safe": false,
+     "confidence": 0.497,
+     "needs_human": true
+    },
+    {
+     "ref": "2.2.A",
+     "label": "2.2.A capacity >= 500 tons",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.995,
+     "needs_human": false
+    },
+    {
+     "ref": "2.2.B",
+     "label": "2.2.B full-load <= 1.20 kW/ton",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.998,
+     "needs_human": false
+    },
+    {
+     "ref": "2.2.C",
+     "label": "2.2.C IPLV <= 0.80",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.998,
+     "needs_human": false
+    },
+    {
+     "ref": "2.2.D",
+     "label": "2.2.D GWP <= 700",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.998,
+     "needs_human": false
+    },
+    {
+     "ref": "2.2.E",
+     "label": "2.2.E sound <= 78 dBA @30ft",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.99,
+     "needs_human": false
+    },
+    {
+     "ref": "2.2.F",
+     "label": "2.2.F ambient >= 125F",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.99,
+     "needs_human": false
+    },
+    {
+     "ref": "2.3.A",
+     "label": "2.3.A 460/3/60 single point",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.993,
+     "needs_human": false
+    },
+    {
+     "ref": "2.3.B",
+     "label": "2.3.B SCCR >= 65 kA",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.997,
+     "needs_human": false
+    },
+    {
+     "ref": "2.4.A",
+     "label": "2.4.A mag-bearing or VS screw",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.993,
+     "needs_human": false
+    },
+    {
+     "ref": "2.4.B",
+     "label": "2.4.B EC fans",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.993,
+     "needs_human": false
+    },
+    {
+     "ref": "2.4.C",
+     "label": "2.4.C e-coat coils",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.987,
+     "needs_human": false
+    },
+    {
+     "ref": "2.4.D",
+     "label": "2.4.D free cooling",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.993,
+     "needs_human": false
+    },
+    {
+     "ref": "2.4.E",
+     "label": "2.4.E BACnet/IP native",
+     "expected": "deviate",
+     "got": "deviate",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.999,
+     "needs_human": false
+    },
+    {
+     "ref": "2.5.A",
+     "label": "2.5.A weight <= 30000 lb",
+     "expected": "comply",
+     "got": "comply",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.999,
+     "needs_human": false
+    },
+    {
+     "ref": "3.1.A",
+     "label": "3.1.A witnessed factory performance test",
+     "expected": "missing",
+     "got": "missing",
+     "correct": true,
+     "safe": true,
+     "confidence": 0.996,
+     "needs_human": false
+    }
+   ],
+   "run_id": "070fef1d5b50"
+  },
+  "bids": {
+   "project": "project_beta",
+   "scope_status_accuracy": 1.0,
+   "n_cells": 18,
+   "arithmetic_errors_expected": [],
+   "arithmetic_errors_found": [],
+   "arithmetic_detection_correct": true,
+   "recommendation": "CoolStream HVAC Equipment",
+   "citation_verification_rate": 1.0,
+   "mismatches": [],
+   "usage": {
+    "models": [
+     "DeepSeek-V4.1-Flash"
+    ],
+    "llm_calls": 3,
+    "cached_calls": 0,
+    "prompt_tokens": 1737,
+    "completion_tokens": 1848,
+    "cost_usd": 0.001311,
+    "llm_latency_s": 82.5,
+    "wall_time_s": 90.08,
+    "trace": [
+     {
+      "purpose": "bids:extract",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 54.48,
+      "completion_tokens": 798,
+      "cost_usd": 0.000557
+     },
+     {
+      "purpose": "bids:extract",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 21.62,
+      "completion_tokens": 849,
+      "cost_usd": 0.000516
+     },
+     {
+      "purpose": "bids:memo",
+      "model": "DeepSeek-V4.1-Flash",
+      "cached": false,
+      "latency_s": 6.39,
+      "completion_tokens": 201,
+      "cost_usd": 0.000238
+     }
+    ]
+   },
+   "run_id": "4a0cbfa5c057"
+  }
+ },
+ "lead_time_calibration": {
+  "split": "fit <= 2012, test >= 2013 (chronological)",
+  "n_fit": 2540,
+  "n_test": 1584,
+  "quantiles": {
+   "p50": {
+    "predicted_slip_ratio": 1.0,
+    "realised_share_on_or_before": 0.9583
+   },
+   "p80": {
+    "predicted_slip_ratio": 1.0,
+    "realised_share_on_or_before": 0.9583
+   },
+   "p90": {
+    "predicted_slip_ratio": 1.0,
+    "realised_share_on_or_before": 0.9583
+   },
+   "p95": {
+    "predicted_slip_ratio": 1.0909,
+    "realised_share_on_or_before": 0.9912
+   }
+  },
+  "p_late_train": 0.074,
+  "p_late_test": 0.0417
+ }
+}

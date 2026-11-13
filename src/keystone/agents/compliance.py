@@ -216,7 +216,11 @@ def assess(spec_doc_id: str, submittal_doc_id: str, verify: bool = True) -> Agen
             else:
                 factors["rule_check"] = 0.0
                 reasons.append(f"rule check says {rule.status} ({rule.explanation}) but model said {verdict}")
-                final = rule.status  # trust arithmetic over the model, but flag it
+                # Asymmetric on purpose: a failed numeric check is SUFFICIENT for a deviation, but a passing one is
+                # only NECESSARY for compliance (the requirement may have parts the number does not capture, e.g.
+                # "5 years parts AND labor"). So arithmetic can downgrade comply->deviate, never upgrade.
+                if rule.status == "deviate":
+                    final = "deviate"
         chk = checks.get(str(r.get("ref")))
         verifier = None
         if chk and chk.get("_error"):

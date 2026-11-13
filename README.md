@@ -89,7 +89,22 @@ second model family agrees (0.25), model's own certainty (0.10, deliberately low
 - **dev** = Project Alpha (480 V switchgear) — used while writing prompts.
 - **held-out** = Project Beta (air-cooled chillers) — a different equipment class, units (kW vs tons, kg vs lb, °C vs °F, dBA at a different distance), and documents never used while writing prompts.
 
-<!-- EVAL_TABLE -->
+| Split | Specialist | Result |
+|---|---|---|
+| dev (Alpha) | spec_compliance | **20/20** requirements exact · issue recall 100% · false issues 0 · citations verified 100% |
+| held-out (Beta) | spec_compliance | first run **15/16** — the single miss had confidence 0.50 and was **routed to a human**, not auto-decided (all 15 high-confidence findings correct) |
+| held-out (Beta) | spec_compliance, after fix | **16/16** · escalation 6% (the 1 finding where rule check and models disagree) · auto-decided accuracy 100% |
+| dev (Alpha) | bid_leveling | scope matrix **36/36** cells · arithmetic error found (Helix: items sum $1,004,500 vs stated $991,500) · quotes verified 98.8% |
+| held-out (Beta) | bid_leveling | scope matrix **18/18** cells · no false arithmetic alarms · quotes verified 100% |
+
+The held-out miss was instructive and is kept in [`eval/results_before_fix.json`](eval/results_before_fix.json): the spec required
+"5 years parts **and labor**", the vendor offered "5 years parts only; labor … first year". Both models said *deviate*, but the numeric
+rule check (5 yr ≥ 5 yr) overrode them. Fix (general, not data-specific): a failed numeric check is *sufficient* for a deviation but a
+passing one is only *necessary* for compliance — arithmetic may downgrade a verdict, never upgrade it (`test_rule_check_never_upgrades_a_deviation`).
+Note this means the post-fix held-out number is no longer strictly blind.
+
+Hallucination check: across both projects every compliance citation and 99% of bid citations were found verbatim in the source
+PDFs; the remaining bid quote was flagged `verified: false` in the output rather than silently trusted.
 
 Lead-time honesty: the promise-slip model is back-tested chronologically on public data (fit ≤ 2012, test ≥ 2013, n = 1,584):
 deliveries arrived by the predicted P50/P80/P90 date 95.8% of the time and by P95 99.1% — i.e. **conservative**, because suppliers

@@ -205,3 +205,23 @@ def test_shared_envelope_is_serialisable():
     d = json.loads(r.model_dump_json())
     for k in ("schema_version", "agent", "run_id", "status", "summary", "result", "confidence", "human_review", "usage"):
         assert k in d
+
+
+def test_rule_check_never_upgrades_a_deviation(monkeypatch):
+    """Numeric pass on one dimension must not overturn a model-found deviation on another (parts vs labor)."""
+    from keystone.agents import compliance
+    from keystone.docs import store
+
+    spec = store().ingest_text("1.4 WARRANTY. A. Compressor warranty: 5 years parts and labor from startup.", "spec.txt", "spec")
+    sub = store().ingest_text("Compressor warranty: 5 years parts only; labor covered for the first year from startup.", "sub.txt", "submittal")
+
+    def fake(system, user, **kw):
+        if "extract every atomic" in system:
+            return {"requirements": [{"ref": "1.4.A", "title": "Warranty", "requirement": "5y parts and labor", "quote": "Compressor warranty: 5 years parts and labor from startup.", "page": 1, "comparator": ">=", "value": 5, "unit": "years", "criticality": "major"}]}
+        if "meticulous submittal reviewer" in system:
+            return {"findings": [{"ref": "1.4.A", "verdict": "deviate", "submittal_quote": "5 years parts only; labor covered for the first year", "page": 1, "offered_value": 5, "offered_unit": "years", "certainty": 0.9}]}
+        return {"checks": [{"ref": "1.4.A", "verdict": "deviate", "note": "labor 1 year"}]}
+
+    monkeypatch.setattr(compliance, "chat_json", fake)
+    f = compliance.check_compliance(spec.doc_id, sub.doc_id).result["findings"][0]
+    assert f["verdict"] == "deviate" and f["rule_check"]["status"] == "comply" and f["needs_human"]
