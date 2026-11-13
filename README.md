@@ -174,7 +174,7 @@ Amber / any MCP host ───────── MCP (stdio|HTTP) ───┤
    runs/results/*.json  ← every run persisted (audit log, replay in the UI)
 ```
 
-Repository layout: `src/keystone/` (agents, MCP server, API, CLI), `web/` (UI), `samples/` (synthetic projects + labels),
+Repository layout: `src/keystone/` (agents, MCP server, API, CLI), `web/` (UI), `samples/` (synthetic projects + labels), `docs/` (competitor research, demo script, deck outline),
 `scripts/` (data build, MCP smoke test), `tests/` (offline tests), `eval/` (accuracy report).
 
 ## Known limitations (honest list)
